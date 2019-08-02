@@ -63,6 +63,8 @@ open class NFXProtocol: URLProtocol
         
         URLProtocol.setProperty("1", forKey: "NFXInternal", in: req)
         
+        session = NFX.sharedInstance().session!
+        
         if session == nil {
             session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: nil)
         }
