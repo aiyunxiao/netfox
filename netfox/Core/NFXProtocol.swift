@@ -59,6 +59,9 @@ open class NFXProtocol: URLProtocol
         
         let mutableRequest = (request as NSURLRequest).mutableCopy() as! NSMutableURLRequest
         URLProtocol.setProperty(true, forKey: NFXProtocol.nfxInternalKey, in: mutableRequest)
+        if NFX.sharedInstance().session != nil {
+            session = NFX.sharedInstance().session!
+        }
         session.dataTask(with: mutableRequest as URLRequest).resume()
     }
     

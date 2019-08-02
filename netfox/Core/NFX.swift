@@ -31,6 +31,8 @@ open class NFX: NSObject
         var windowController: NFXWindowController?
         let mainMenu: NSMenu? = NSApp.mainMenu?.items[1].submenu
         var nfxMenuItem: NSMenuItem = NSMenuItem(title: "netfox", action: #selector(NFX.show), keyEquivalent: String.init(describing: (character: NSF9FunctionKey, length: 1)))
+    #else
+        var session:URLSession?
     #endif
     
     // swiftSharedInstance is not accessible from ObjC
@@ -63,6 +65,10 @@ open class NFX: NSObject
     fileprivate var filters = [Bool]()
     fileprivate var lastVisitDate: Date = Date()
     internal var cacheStoragePolicy = URLCache.StoragePolicy.notAllowed
+    
+    @objc open func configUserSession(reqSession:URLSession) {
+        self.session = reqSession
+    }
 
     @objc open func start()
     {
